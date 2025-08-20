@@ -28,17 +28,66 @@ document.addEventListener('DOMContentLoaded', function() {
         mobileMenu.classList.toggle('active');
     });
 
-    // Navbar background on scroll
+    // Optimized scroll handling with throttling
     const navbar = document.getElementById('navbar');
-    window.addEventListener('scroll', function() {
-        if (window.scrollY > 50) {
+    const scrollProgress = document.getElementById('scroll-progress');
+    let scrollTimeout;
+
+    function updateScrollElements() {
+        const scrollTop = window.pageYOffset;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const scrollPercent = (scrollTop / docHeight) * 100;
+        
+        // Update progress bar
+        if (scrollProgress) {
+            scrollProgress.style.width = scrollPercent + '%';
+        }
+        
+        // Update navbar background
+        if (scrollTop > 50) {
             navbar.style.background = 'rgba(255, 255, 255, 0.98)';
             navbar.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
         } else {
             navbar.style.background = 'rgba(255, 255, 255, 0.95)';
             navbar.style.boxShadow = 'none';
         }
-    });
+        
+        // Update active navigation
+        updateActiveNavigation();
+    }
+
+    function throttleScroll() {
+        if (!scrollTimeout) {
+            scrollTimeout = requestAnimationFrame(() => {
+                updateScrollElements();
+                scrollTimeout = null;
+            });
+        }
+    }
+
+    window.addEventListener('scroll', throttleScroll);
+
+    // Active navigation based on scroll position
+    function updateActiveNavigation() {
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-link');
+        const scrollPosition = window.scrollY + 100;
+
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.offsetHeight;
+            const sectionId = section.getAttribute('id');
+
+            if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${sectionId}`) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+        });
+    }
 
     // Intersection Observer for animations
     const observerOptions = {

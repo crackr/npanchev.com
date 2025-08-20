@@ -9,10 +9,17 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    </noscript>
 </head>
 <body>
+    <!-- Scroll Progress Indicator -->
+    <div class="scroll-progress" id="scroll-progress"></div>
+
     <!-- Navigation -->
     <nav class="navbar" id="navbar">
         <div class="nav-container">
@@ -43,21 +50,26 @@
                     </h1>
                     <h2 class="hero-subtitle">Gen AI Architect & AI Transformation Specialist</h2>
                     <p class="hero-description">
-                        Driving meaningful change through Artificial Intelligence with 18+ years of IT experience. 
-                        Helping organizations unlock AI's potential for business transformation across Azure, AWS, and GCP.
+                        I don't just implement AI — I architect enterprise transformations that deliver measurable results. 
+                        At Thermo Fisher Scientific, I've deployed RAG systems, multi-agent frameworks, and predictive analytics 
+                        that revolutionize how organizations leverage AI across Azure, AWS, and GCP.
                     </p>
                     <div class="hero-stats">
                         <div class="stat">
                             <span class="stat-number">18+</span>
-                            <span class="stat-label">Years Experience</span>
+                            <span class="stat-label">Years IT Leadership</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">500+</span>
+                            <span class="stat-label">Monthly AI Community</span>
                         </div>
                         <div class="stat">
                             <span class="stat-number">3</span>
-                            <span class="stat-label">Cloud Platforms</span>
+                            <span class="stat-label">Major Cloud Platforms</span>
                         </div>
                         <div class="stat">
-                            <span class="stat-number">100+</span>
-                            <span class="stat-label">AI Talks Sessions</span>
+                            <span class="stat-number">6+</span>
+                            <span class="stat-label">Years AI Architecture</span>
                         </div>
                     </div>
                     <div class="hero-buttons">
@@ -93,8 +105,13 @@
             <div class="about-content">
                 <div class="about-text">
                     <p class="about-intro">
-                        I'm not just riding the AI wave — I'm helping to shape it. With over 18 years of experience in IT, 
-                        I've evolved from building enterprise systems to driving meaningful change through Artificial Intelligence.
+                        At Thermo Fisher Scientific, I architect AI solutions that don't just automate processes — they transform entire business operations. 
+                        From deploying RAG systems that revolutionize data retrieval to implementing multi-agent frameworks that orchestrate complex workflows, 
+                        I bridge the gap between cutting-edge AI research and practical business value.
+                    </p>
+                    <p class="about-secondary">
+                        My approach combines deep technical expertise with business acumen, ensuring every AI initiative delivers measurable ROI 
+                        while building sustainable, scalable architectures that grow with your organization.
                     </p>
                     <div class="about-highlights">
                         <div class="highlight">
