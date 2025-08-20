@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://npanchev.com/sitemap.xml
+
+# Disallow crawling of admin areas or sensitive files
+Disallow: /admin/
+Disallow: /.git/
+Disallow: /node_modules/

@@ -1,0 +1,39 @@
+{
+  "name": "npanchev-portfolio",
+  "version": "1.0.0",
+  "description": "Professional portfolio website for Nikolay Panchev - Gen AI Architect and AI Transformation Specialist",
+  "main": "index.html",
+  "scripts": {
+    "dev": "live-server --port=3000 --open=/",
+    "build": "npm run minify-css && npm run minify-js",
+    "minify-css": "cleancss -o styles.min.css styles.css",
+    "minify-js": "uglifyjs script.js -o script.min.js -c -m",
+    "optimize": "imagemin '*.{jpg,png,svg}' --out-dir=optimized",
+    "serve": "http-server -p 8080 -c-1"
+  },
+  "keywords": [
+    "portfolio",
+    "ai-architect",
+    "artificial-intelligence",
+    "machine-learning",
+    "azure",
+    "aws",
+    "gcp",
+    "rag",
+    "generative-ai"
+  ],
+  "author": "Nikolay Panchev <crackr@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "clean-css-cli": "^5.6.2",
+    "http-server": "^14.1.1",
+    "imagemin-cli": "^8.0.0",
+    "live-server": "^1.2.2",
+    "uglify-js": "^3.17.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/npanchev/portfolio"
+  },
+  "homepage": "https://npanchev.com"
+}
