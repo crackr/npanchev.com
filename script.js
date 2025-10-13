@@ -1,13 +1,29 @@
 // Smooth scrolling and navigation functionality
 document.addEventListener('DOMContentLoaded', function() {
-    // Smooth scrolling for navigation links
+    // Smooth scrolling for navigation links with mobile support
     const navLinks = document.querySelectorAll('.nav-link, .btn[href^="#"]');
     navLinks.forEach(link => {
         link.addEventListener('click', function(e) {
             e.preventDefault();
             const target = document.querySelector(this.getAttribute('href'));
             if (target) {
-                const headerOffset = 70;
+                const headerOffset = window.innerWidth <= 768 ? 60 : 70;
+                const elementPosition = target.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        });
+        
+        // Touch support for mobile
+        link.addEventListener('touchend', function(e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                const headerOffset = window.innerWidth <= 768 ? 60 : 70;
                 const elementPosition = target.getBoundingClientRect().top;
                 const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
 
@@ -19,13 +35,55 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Mobile menu toggle
+    // Mobile menu toggle with touch support
     const mobileMenu = document.getElementById('mobile-menu');
     const navMenu = document.querySelector('.nav-menu');
+    const navLinks = document.querySelectorAll('.nav-link');
     
-    mobileMenu.addEventListener('click', function() {
+    // Toggle mobile menu
+    function toggleMobileMenu() {
         navMenu.classList.toggle('active');
         mobileMenu.classList.toggle('active');
+        document.body.classList.toggle('menu-open');
+    }
+    
+    // Close mobile menu
+    function closeMobileMenu() {
+        navMenu.classList.remove('active');
+        mobileMenu.classList.remove('active');
+        document.body.classList.remove('menu-open');
+    }
+    
+    // Event listeners for mobile menu
+    if (mobileMenu) {
+        mobileMenu.addEventListener('click', toggleMobileMenu);
+        mobileMenu.addEventListener('touchend', function(e) {
+            e.preventDefault();
+            toggleMobileMenu();
+        });
+    }
+    
+    // Close menu when clicking on nav links
+    navLinks.forEach(link => {
+        link.addEventListener('click', closeMobileMenu);
+        link.addEventListener('touchend', function(e) {
+            e.preventDefault();
+            closeMobileMenu();
+        });
+    });
+    
+    // Close menu when clicking outside
+    document.addEventListener('click', function(e) {
+        if (!navMenu.contains(e.target) && !mobileMenu.contains(e.target)) {
+            closeMobileMenu();
+        }
+    });
+    
+    // Close menu on escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            closeMobileMenu();
+        }
     });
 
     // Optimized scroll handling with throttling
@@ -343,12 +401,35 @@ document.addEventListener('DOMContentLoaded', function() {
         setTimeout(createConnections, 100);
     });
 
-    // Add loading animation
+    // Add loading animation with mobile optimization
     document.body.style.opacity = '0';
     setTimeout(() => {
         document.body.style.transition = 'opacity 0.5s ease-in';
         document.body.style.opacity = '1';
     }, 100);
+
+    // Mobile-specific optimizations
+    if (window.innerWidth <= 768) {
+        // Reduce animation complexity on mobile
+        const style = document.createElement('style');
+        style.textContent = `
+            @media (max-width: 768px) {
+                .node {
+                    animation-duration: 3s;
+                }
+                .btn::before {
+                    display: none;
+                }
+                .highlight:hover,
+                .timeline-content:hover,
+                .speaking-card:hover,
+                .contact-card:hover {
+                    transform: none;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    }
 
     // Enhanced scroll-triggered animations
     const scrollAnimations = new IntersectionObserver(function(entries) {
