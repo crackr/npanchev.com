@@ -162,7 +162,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }, observerOptions);
 
     // Observe elements for animation
-    const animateElements = document.querySelectorAll('.timeline-item, .highlight, .speaking-card, .skills-category, .contact-card');
+    const animateElements = document.querySelectorAll('.timeline-item, .highlight, .speaking-card, .skills-category, .contact-card, .project-card, .testimonial-card');
     animateElements.forEach(el => {
         observer.observe(el);
     });
@@ -448,6 +448,15 @@ document.addEventListener('DOMContentLoaded', function() {
         section.style.opacity = '0';
         section.style.transform = 'translateY(30px)';
         scrollAnimations.observe(section);
+    });
+    
+    // Add specific animations for project cards
+    const projectCards = document.querySelectorAll('.project-card');
+    projectCards.forEach((card, index) => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(30px)';
+        card.style.transitionDelay = `${index * 0.1}s`;
+        scrollAnimations.observe(card);
     });
 });
 
